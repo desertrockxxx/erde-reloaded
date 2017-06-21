@@ -162,7 +162,7 @@
         </div>
     </aside>
 
-    <!-- HERE TEST-->
+    <!-- HERE -->
     <section id="order">
         <div class="container">
             <div class="row">
@@ -174,13 +174,45 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-12 text-center">
+                <div class="col-lg-12 col-md-12 text-center">
+                    <div class="auswahl-box">
+                    <i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i>
+                    <h3>Ihre Auswahl</h3>
+                    <p class="text-muted">Hier haben Sie ihre Auswahl</p>
+                    
+                    <!-- AUSWAHL -->
+                    <form action="<?php echo $_SERVER['PHP_SELF'];?>" name="auswahlform" method="GET">
+                        <!--<div>-->
+                        <!--    <label for="auswahlmenge">Menge: </label>-->
+                        <!--    <input type="text" name="auswahlmenge" id="auswahlmenge"/> cm<sup>3</sup>/l-->
+                        <!--</div>-->
+                        <div>
+                            <label for="auswahlsorte">Sorte: </label>
+                            <input type="text" name="auswahlsorte" id="auswahlsorte"/>
+                        </div>
+                        <!--<div>-->
+                        <!--    <button type="submit" class="btn btn-primary">In den Warenkorb</button>-->
+                        <!--    <input type="button" class="btn btn-danger" value="Zurück" onclick="location.href = '/';">-->
+                        <!--</div>-->
+                    </form>
+                    <!-- AUSWAHL -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                
+                <!--Konditionenlogik Hier-->
+                
+                
+                <!--Konditionenlogik Hier-->
+                
+                <div class="col-lg-6 col-md-12 text-center">
                     <div class="dimension-box">
                         <i class="fa fa-4x fa-diamond text-primary sr-icons"></i>
-                        <h3>Bitte Dimension angeben (lose Option)</h3>
+                        <h3>Bitte Dimension angeben (Lose Option)</h3>
                         <p class="text-muted">Schreiben Sie einfach und unkomplexiert ihre Dimension an.</p>
                         
-                        <!-- DIMENSION TEST-->
+                        <!-- DIMENSION -->
                         <div>
                             <input name="zahl1" type="range" min="1" max="100" value="1" step="1" 
                                 onchange="showValue1(this.value); rechnung()" />
@@ -206,16 +238,20 @@
                                 <option value="Kartoffel">Kartoffel</option>
                             </select>
                         </div>
-                        <!-- DIMENSION TEST-->
+                        <div>
+                            <button type="submit" class="btn btn-primary" name="dimensionwk">In den Warenkorb</button>
+                        </div>
+                        
+                        <!-- DIMENSION -->
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12 text-center">
+                <div class="col-lg-6 col-md-12 text-center">
                     <div class="menge-box">
                         <i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i>
-                        <h3>Bitte Menge angeben</h3>
+                        <h3>Bitte Menge angeben (Sack Option)</h3>
                         <p class="text-muted">Schreiben Sie ihre Menge an.</p>
                         
-                        <!-- MENGE TEST-->
+                        <!-- MENGE-->
                         <div>
                             <label for="menge">Menge:</label> 
                             <input type="number" id="menge" name="menge" min="1" max="9999" step="1" value="1" 
@@ -232,39 +268,19 @@
                                 <option value="Erdbeere">Erdbeere</option>
                                 <option value="Kartoffel">Kartoffel</option>
                             </select>
-                        </div>       
-                        <!-- MENGE TEST-->
+                        </div> 
+                        <div>
+                            <button type="submit" class="btn btn-primary" name="mengewk">In den Warenkorb</button>
+                        </div>
                         
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12 text-center">
-                    <div class="auswahl-box">
-                    <i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i>
-                    <h3>Ihre Auswahl</h3>
-                    <p class="text-muted">Hier haben Sie ihre Auswahl</p>
-                    
-                    <!-- AUSWAHL TEST-->
-                    <form action="<?php echo $_SERVER['PHP_SELF'];?>" name="auswahlform" method="GET">
-                        <div>
-                            <label for="auswahlmenge">Menge: </label>
-                            <input type="text" name="auswahlmenge" id="auswahlmenge"/> cm<sup>3</sup>/l
-                        </div>
-                        <div>
-                            <label for="auswahlsorte">Sorte: </label>
-                            <input type="text" name="auswahlsorte" id="auswahlsorte"/>
-                        </div>
-                        <div>
-                            <button type="submit" class="btn btn-primary">In den Warenkorb</button>
-                            <input type="button" class="btn btn-danger" value="Zurück" onclick="location.href = '/';">
-                        </div>
-                    </form>
-                    <!-- AUSWAHL TEST-->
+                        <!-- MENGE -->
+                        
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- HERE TEST-->
+    <!-- HERE -->
 
     <section id="contact">
         <div class="container">
