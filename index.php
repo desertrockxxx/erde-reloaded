@@ -1,4 +1,14 @@
-<?php require_once("header.php");?>
+
+<?php 
+if(isset($_GET['mainid']))
+{
+    die(htmlentities($_GET['mainid']));
+    $auswahl = $_GET['mainid'];
+    
+}
+
+require_once("header.php");
+?>
 
     <section class="bg-primary" id="about">
         <div class="container">
@@ -174,17 +184,17 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 col-md-12 text-center">
+                <div class="col-lg-offset-4 col-lg-4 col-md-12 text-center">
                     <!-- AUSWAHL -->
                     <div class="auswahl-box">
                     <i class="fa fa-4x fa-diamond text-primary sr-icons"></i>
-                    <h3>Ihre Auswahl</h3>
-                    <p class="text-muted">Hier haben Sie ihre Auswahl</p>
+                    <h3>Sorte</h3>
+                    <p class="text-muted">Wählen Sie ihre Sorte.</p>
                     <form action="<?php echo $_SERVER['PHP_SELF'];?>" name="auswahlform" method="GET">
                         <div>
                             <label for="sorte">Sorte:</label>
                             <select class="form-control" id="Select_1" name="sorte"
-                                onchange="waehleSorte(this.value);">
+                                onchange="waehleSorte(this.value); mainInfo(this.value) ">
                                 <option value="Gurke">Gurke</option>
                                 <option value="Tomate">Tomate</option>
                                 <option value="Aubergine">Aubergine</option>
@@ -192,6 +202,7 @@
                                 <option value="Kartoffel">Kartoffel</option>
                             </select>
                         </div>
+                        
                         <!--<div>-->
                         <!--    <label for="auswahlmenge">Menge: </label>-->
                         <!--    <input type="text" name="auswahlmenge" id="auswahlmenge"/> cm<sup>3</sup>/l-->
@@ -207,21 +218,76 @@
                     </form>
                     </div>
                     <!-- AUSWAHL -->
+                    
                 </div>
             </div>
+            <h1 id="test2">Test Test</h1>
             <div class="row">
+
+                <!--Konditionenlogik -->
+                <?php
                 
+                $auswahl = $_GET['mainid'];
+                
+                if($auswahl == 'Gurke') $kondition == 1;
+                if($auswahl == 'Tomate') $kondition == 2;
+                if($auswahl == 'Aubergine') $kondition == 3;
+                if($auswahl == 'Erdbeere') $kondition == 4;
+                if($auswahl == 'Kartoffel') $kondition == 5;
+                
+                switch ($kondition) {
+                    case 1:
+                        $lose = false;
+                        $topf = true;
+                        $sack = false;
+            
+                        break;
+                    case 2:
+                        $lose = true;
+                        $topf = true;
+                        $sack = false;
+                        
+                        break;
+                    case 3:
+                        $lose = false;
+                        $topf = true;
+                        $sack = true;
+                        
+                        break;
+                    case 4:
+                        $lose = true;
+                        $topf = false;
+                        $sack = true;
+                        
+                        break;
+                    case 5:
+                        $lose = true;
+                        $topf = false;
+                        $sack = false;
+                        
+                        break;
+                    case 6:
+                        $lose = false;
+                        $topf = false;
+                        $sack = true;
+                        
+                        break;
+                    default:
+                        $lose = true;
+                        $topf = true;
+                        $sack = true;
+                        
+                        break;
+                }
+                ?>
                 <!--Konditionenlogik -->
                 
-                
-                <!--Konditionenlogik -->
-                
-                <div class="col-lg-6 col-md-12 text-center">
-                    <!-- DIMENSION -->
-                    <div class="dimension-box">
+                <div class="col-lg-4 col-md-12 text-center">
+                    <!-- LOSE -->
+                    <div class="lose-box">
                         <i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i>
-                        <h3>Bitte Dimension angeben (Lose Option)</h3>
-                        <p class="text-muted">Schreiben Sie einfach und unkomplexiert ihre Dimension an.</p>
+                        <h3>Lose Option</h3>
+                        <p class="text-muted">Die Dimension ist in cm angegeben</p>
                         <div>
                             <input name="zahl1" type="range" min="1" max="100" value="1" step="1" 
                                 onchange="showValue1(this.value); rechnung()" />
@@ -235,54 +301,71 @@
                                 onchange="showValue3(this.value); rechnung()" />
                             <span id="range3">1</span>
                         </div>
-
-                        <!--<div>-->
-                        <!--    <label for="sorte">Sorte:</label>-->
-                        <!--    <select class="form-control" id="Select_1" name="sorte"-->
-                        <!--        onchange="waehleSorte(this.value);">-->
-                        <!--        <option value="Gurke">Gurke</option>-->
-                        <!--        <option value="Tomate">Tomate</option>-->
-                        <!--        <option value="Aubergine">Aubergine</option>-->
-                        <!--        <option value="Erdbeere">Erdbeere</option>-->
-                        <!--        <option value="Kartoffel">Kartoffel</option>-->
-                        <!--    </select>-->
-                        <!--</div>-->
-                        <!--<div>-->
-                            <button type="submit" class="btn btn-primary" name="dimensionwk">In den Warenkorb</button>
+                        <div>
+                            <button type="submit" class="btn btn-primary" name="losewk">In den Warenkorb</button>
                         </div>
                     </div>
-                    <!-- DIMENSION -->
+                    <!-- LOSE -->
                 </div>
-                <div class="col-lg-6 col-md-12 text-center">
-                    <!-- MENGE-->
-                    <div class="menge-box">
+                <div class="col-lg-4 col-md-12 text-center">
+                    <!-- SACK-->
+                    <div class="sack-box">
                         <i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i>
-                        <h3>Bitte Menge angeben (Sack Option)</h3>
-                        <p class="text-muted">Schreiben Sie ihre Menge an.</p>
-                        
-                        
+                        <h3>Sack Option</h3>
+                        <p class="text-muted">Ein Sack wiegt 500l</p>
                         <div>
-                            <label for="menge">Menge:</label> 
-                            <input type="number" id="menge" name="menge" min="1" max="9999" step="1" value="1" 
-                                onchange="showMenge(this.value)"> cm<sup>3</sup>/l
+                            <label for="sack">Menge:</label> 
+                            <input type="number" id="sack" name="sack" min="1" max="9999" step="1" value="1" 
+                                onchange="showMenge(this.value)">
                         </div>
-                    
                         <!--<div>-->
-                        <!--    <label for="sorte">Sorte:</label>-->
-                        <!--    <select class="form-control" id="Select_1" name="sorte"-->
-                        <!--        onchange="waehleSorte(this.value);">-->
-                        <!--        <option value="Gurke">Gurke</option>-->
-                        <!--        <option value="Tomate">Tomate</option>-->
-                        <!--        <option value="Aubergine">Aubergine</option>-->
-                        <!--        <option value="Erdbeere">Erdbeere</option>-->
-                        <!--        <option value="Kartoffel">Kartoffel</option>-->
-                        <!--    </select>-->
-                        <!--</div> -->
+                        <!--    <label for="menge">Menge:</label> -->
+                        <!--    <input type="number" id="menge" name="menge" min="1" max="9999" step="1" value="1" -->
+                        <!--        onchange="showMenge(this.value)"> cm<sup>3</sup>/l-->
+                        <!--</div>-->
                         <div>
-                            <button type="submit" class="btn btn-primary" name="mengewk">In den Warenkorb</button>
+                            <button type="submit" class="btn btn-primary" name="sackwk">In den Warenkorb</button>
                         </div>
                     </div>
-                    <!-- MENGE -->
+                    <!-- SACK -->
+                </div>
+                <div class="col-lg-4 col-md-12 text-center">
+                    <!-- TOPF-->
+                    <div class="topf-box">
+                        <i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i>
+                        <h3>Topf Option</h3>
+                        <p class="text-muted">Ein Topf hat 1m<sup>3</sup></p>
+                        <div>
+                            <label for="topf">Menge:</label> 
+                            <input type="number" id="topf" name="topf" min="1" max="9999" step="1" value="1" 
+                                onchange="showMenge(this.value)">
+                        </div>
+                        <!--<div>-->
+                        <!--    <label for="menge">Menge:</label> -->
+                        <!--    <input type="number" id="menge" name="menge" min="1" max="9999" step="1" value="1" -->
+                        <!--        onchange="showMenge(this.value)"> cm<sup>3</sup>/l-->
+                        <!--</div>-->
+                        <div>
+                            <button type="submit" class="btn btn-primary" name="topfwk">In den Warenkorb</button>
+                        </div>
+                    </div>
+                    <!-- TOPF -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-offset-4 col-lg-4">
+                    <h2>Ergebnis Test</h2>
+                    <div class="hidden">
+                        <label for="auswahlmenge">Menge: </label>
+                        <input type="text" name="auswahlmenge" id="auswahlmenge"/> cm<sup>3</sup>/l
+                    </div>
+                    <div class="hidden">
+                        <label for="auswahlsorte">Sorte: </label>
+                        <input type="text" name="auswahlsorte" id="auswahlsorte"/>
+                    </div>
+                    <div>
+                        <button type="submit">Absenden</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -308,51 +391,5 @@
             </div>
         </div>
     </section>
-    
-    
-    <!--SCRIPTS TEST-->
-    <script>
-        //menge
-        function showMenge(newValue)
-        {
-            document.getElementById("auswahlmenge").value=newValue;
-        }
-        function waehleSorte(newValue)
-        {
-            document.getElementById("auswahlsorte").value=newValue;
-        }
-
-        //dimension
-        /* global x, y, z, sum*/
-        function rechnung() {
-            x = document.getElementById("range1").innerHTML;
-            y = document.getElementById("range2").innerHTML;
-            z = document.getElementById("range3").innerHTML;
-            sum = parseInt(x) * parseInt(y) * parseInt(z);
-            document.getElementById("auswahlmenge").value = sum;
-        }
-        
-        function waehleSorte(newValue)
-        {
-            document.getElementById("auswahlsorte").value=newValue;
-        }
-        
-        function showValue3(newValue)
-        {
-        	document.getElementById("range3").innerHTML=newValue;
-        }
-        
-        function showValue2(newValue)
-        {
-        	document.getElementById("range2").innerHTML=newValue;
-        }
-
-        function showValue1(newValue)
-        {
-        	document.getElementById("range1").innerHTML=newValue;
-        }
-    </script>
-    <!--SCRIPT TEST-->
-
 
 <?php require_once("footer.php");?>
